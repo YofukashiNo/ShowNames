@@ -2,6 +2,7 @@ import { Injector, Logger, settings } from "replugged";
 import { ChannelMemberStore, GuildMemberStore, GuildPrototype } from "./lib/requiredModules.jsx";
 import { defaultSettings } from "./lib/consts.jsx";
 import * as ColorUtils from "./lib/ColorUtils.jsx";
+import { registerSettings } from "./Components/Settings.jsx";
 const PluginInjector = new Injector();
 export const PluginLogger = Logger.plugin("ShowNames");
 export const sns = await settings.init("Tharki.ShowNames", defaultSettings);
@@ -40,6 +41,7 @@ const applyInjections = () => {
   patchLoadedChannelMembers();
 };
 export const start = () => {
+  registerSettings();
   applyInjections();
 };
 
