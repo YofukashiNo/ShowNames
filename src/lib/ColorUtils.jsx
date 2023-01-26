@@ -1,3 +1,6 @@
+/* eslint-disable new-cap */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable consistent-return */
 import { ThemeStore } from "./requiredModules.jsx";
 export const rgba2hex = (rgba) => {
   return `#${rgba
@@ -19,24 +22,19 @@ export const getBackgroundColor = () => {
   return rgba2hex(prop);
 };
 export const LightenDarkenColor = (color, amount) => {
-  return (
-    "#" +
-    color
-      .replace(/^#/, "")
-      .replace(/../g, (color) =>
-        ("0" + Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)).substr(-2),
-      )
-  );
+  return `#${color
+    .replace(/^#/, "")
+    .replace(/../g, (color) =>
+      `0${Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)}`.substr(-2),
+    )}`;
 };
 export const makeColorVisible = (color, precent) => {
   const { theme } = ThemeStore;
   switch (theme) {
     case "light":
       return LightenDarkenColor(color, -precent);
-      break;
     case "dark":
       return LightenDarkenColor(color, precent);
-      break;
     default:
       Logger.err("Unknown theme detected. Contact the developer for help!");
   }

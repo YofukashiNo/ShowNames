@@ -6,6 +6,6 @@ export const getFunctionKeyFromStrings = (Module, StringArray) =>
     StringArray.every((s) => Module[FunctionKey].toString().includes(s)),
   );
 
-export const PrototypeChecker = (ModuleExports, Protos) =>
+export const prototypeChecker = (ModuleExports, Protos) =>
   isObject(ModuleExports) &&
   Protos.every((p) => Object.values(ModuleExports).some((m) => m?.prototype?.[p]));

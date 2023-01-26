@@ -16,5 +16,5 @@ const ChannelMemberStoreModuleKey = Object.keys(ChannelMemberStoreModule).find((
 export const { [ChannelMemberStoreModuleKey]: ChannelMemberStore } = ChannelMemberStoreModule;
 
 export const GuildPrototype = Webpack.getModule((m) =>
-  Utils.PrototypeChecker(m?.exports, ["getRole", "getIconURL"]),
+  Utils.prototypeChecker(m?.exports, ["getRole", "getIconURL"]),
 );

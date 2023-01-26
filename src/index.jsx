@@ -1,7 +1,5 @@
-/* eslint-disable consistent-return */
-/* eslint-disable camelcase */
 import { Injector, Logger, settings } from "replugged";
-import { GuildMemberStore, ChannelMemberStore, GuildPrototype } from "./lib/requiredModules.jsx";
+import { ChannelMemberStore, GuildMemberStore, GuildPrototype } from "./lib/requiredModules.jsx";
 import { defaultSettings } from "./lib/consts.jsx";
 import * as ColorUtils from "./lib/ColorUtils.jsx";
 const PluginInjector = new Injector();
