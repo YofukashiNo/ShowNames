@@ -18,3 +18,13 @@ export const { [ChannelMemberStoreModuleKey]: ChannelMemberStore } = ChannelMemb
 export const GuildPrototype = Webpack.getModule((m) =>
   Utils.prototypeChecker(m?.exports, ["getRole", "getIconURL"]),
 );
+const sliderStrings = [".stickToMarkers", "sortedMarkers"];
+const sliderModule = Webpack.getModule(
+  (m) =>
+    Utils.isObject(m?.exports) &&
+    Object.values(m?.exports).some((m) => sliderStrings.every((s) => m?.toString?.().includes(s))),
+);
+const sliderModuleKey = Object.keys(sliderModule).find((m) =>
+  sliderStrings.every((s) => sliderModule[m].toString().includes(s)),
+);
+export const Slider = sliderModule[sliderModuleKey];
