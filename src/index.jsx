@@ -7,39 +7,43 @@ const PluginInjector = new Injector();
 export const PluginLogger = Logger.plugin("ShowNames");
 export const SettingValues = await settings.init("Tharki.ShowNames", defaultSettings);
 const changeColor = (item) => {
-  if (!item?.colorString) return;
-  const backgroundColor = ColorUtils.getBackgroundColor();
-  const difference = ColorUtils.getDifference(backgroundColor, item.colorString);
+    if (!item?.colorString) {
+      return;
+    }
+    const backgroundColor = ColorUtils.getBackgroundColor(),
+      difference = ColorUtils.getDifference(backgroundColor, item.colorString);
 
-  if (difference > SettingValues.get("colorThreshold", defaultSettings.colorThreshold)) return;
-  const changePercent = Math.floor(
-    ((SettingValues.get("percentage", defaultSettings.percentage) - difference) / 100) * 255,
-  );
-  item.colorString = ColorUtils.makeColorVisible(item.colorString, changePercent);
-};
-const patchLoadedChannelMembers = () => {
-  const ChannelMemerListCache = ChannelMemberStore.__getLocalVars();
-  const channelLists = Object.values(ChannelMemerListCache.memberLists._guildLists);
-  const LoadedMembersCache = channelLists
-    .map((m) => Object.values(m))
-    .flat(1)
-    .map((m) => Object.values(m.members))
-    .flat(1);
-  for (const member of LoadedMembersCache) {
-    changeColor(member);
-  }
-};
-
-const applyInjections = () => {
-  PluginInjector.after(GuildMemberStore, "getMember", (args, res) => {
-    changeColor(res);
-  });
-  if (SettingValues.get("shouldPatchRole", defaultSettings.shouldPatchRole))
-    PluginInjector.after(GuildPrototype.prototype, "getRole", (args, res) => {
+    if (difference > SettingValues.get("colorThreshold", defaultSettings.colorThreshold)) {
+      return;
+    }
+    const changePercent = Math.floor(
+      ((SettingValues.get("percentage", defaultSettings.percentage) - difference) / 100) * 255,
+    );
+    item.colorString = ColorUtils.makeColorVisible(item.colorString, changePercent);
+  },
+  patchLoadedChannelMembers = () => {
+    const ChannelMemerListCache = ChannelMemberStore.__getLocalVars(),
+      channelLists = Object.values(ChannelMemerListCache.memberLists._guildLists),
+      LoadedMembersCache = channelLists
+        .map((m) => Object.values(m))
+        .flat(1)
+        .map((m) => Object.values(m.members))
+        .flat(1);
+    for (const member of LoadedMembersCache) {
+      changeColor(member);
+    }
+  },
+  applyInjections = () => {
+    PluginInjector.after(GuildMemberStore, "getMember", (args, res) => {
       changeColor(res);
     });
-  patchLoadedChannelMembers();
-};
+    if (SettingValues.get("shouldPatchRole", defaultSettings.shouldPatchRole)) {
+      PluginInjector.after(GuildPrototype.prototype, "getRole", (args, res) => {
+        changeColor(res);
+      });
+    }
+    patchLoadedChannelMembers();
+  };
 export const start = () => {
   registerSettings();
   applyInjections();

@@ -1,6 +1,6 @@
 import { common, components } from "replugged";
-const { React } = common;
-const { FormItem, Slider } = components;
+const { React } = common,
+  { FormItem, Slider } = components;
 
 export class SliderItem extends React.Component {
   render() {
