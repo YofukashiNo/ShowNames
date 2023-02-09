@@ -23,7 +23,7 @@ export const Settings = () => {
           minValue: 10,
           maxValue: 100,
           renderValue: (value) => `${value}%`,
-          ...util.useSetting(SettingValues, "colorThreshold"),
+          ...util.useSetting(SettingValues, "colorThreshold", defaultSettings.colorThreshold),
         }}
       />
       <SliderItem
@@ -34,12 +34,12 @@ export const Settings = () => {
           minValue: 10,
           maxValue: 100,
           renderValue: (value) => `${value}%`,
-          ...util.useSetting(SettingValues, "percentage"),
+          ...util.useSetting(SettingValues, "percentage", defaultSettings.percentage),
         }}
       />
       <SwitchItem
-        note="Show someone's Nitro banner instead of USRBG banner if they have one."
-        {...util.useSetting(SettingValues, "shouldPatchRole")}>
+        note="Whether to change the role color. Normally the member color gets patched directly. (It is recommended to keep this turned off, as it may cause performance issues.)"
+        {...util.useSetting(SettingValues, "shouldPatchRole", defaultSettings.shouldPatchRole)}>
         Role color
       </SwitchItem>
     </div>
