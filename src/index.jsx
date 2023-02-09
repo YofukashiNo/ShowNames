@@ -5,15 +5,15 @@ import * as ColorUtils from "./lib/ColorUtils.jsx";
 import { registerSettings } from "./Components/Settings.jsx";
 const PluginInjector = new Injector();
 export const PluginLogger = Logger.plugin("ShowNames");
-export const sns = await settings.init("Tharki.ShowNames", defaultSettings);
+export const SettingValues = await settings.init("Tharki.ShowNames", defaultSettings);
 const changeColor = (item) => {
   if (!item?.colorString) return;
   const backgroundColor = ColorUtils.getBackgroundColor();
   const difference = ColorUtils.getDifference(backgroundColor, item.colorString);
 
-  if (difference > sns.get("colorThreshold", defaultSettings.colorThreshold)) return;
+  if (difference > SettingValues.get("colorThreshold", defaultSettings.colorThreshold)) return;
   const changePercent = Math.floor(
-    ((sns.get("percentage", defaultSettings.percentage) - difference) / 100) * 255,
+    ((SettingValues.get("percentage", defaultSettings.percentage) - difference) / 100) * 255,
   );
   item.colorString = ColorUtils.makeColorVisible(item.colorString, changePercent);
 };
@@ -34,7 +34,7 @@ const applyInjections = () => {
   PluginInjector.after(GuildMemberStore, "getMember", (args, res) => {
     changeColor(res);
   });
-  if (sns.get("shouldPatchRole", defaultSettings.shouldPatchRole))
+  if (SettingValues.get("shouldPatchRole", defaultSettings.shouldPatchRole))
     PluginInjector.after(GuildPrototype.prototype, "getRole", (args, res) => {
       changeColor(res);
     });
