@@ -1,8 +1,9 @@
 import { common, components } from "replugged";
-const { React } = common,
-  { FormItem, Slider } = components;
-
+import * as Types from "../types";
+const { React } = common;
+const { FormItem, Slider } = components;
 export class SliderItem extends React.Component {
+  props: Types.SliderItemProps;
   render() {
     return (
       <FormItem
