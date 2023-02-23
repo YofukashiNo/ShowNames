@@ -1,8 +1,7 @@
 import { components, util } from "replugged";
 import { PluginLogger, SettingValues } from "../index";
-const { SwitchItem } = components;
+const { SwitchItem, SliderItem } = components;
 import { defaultSettings } from "../lib/consts";
-import { SliderItem } from "./SliderItem";
 import * as Types from "../types";
 export const registerSettings = (): void => {
   for (const key in defaultSettings) {
@@ -16,26 +15,26 @@ export const Settings = (): Types.ReactElement => (
   <div>
     <SliderItem
       {...{
-        title: "Color Threshold",
-        note: "The threshold at which the plugin should change colors. (Default: 70)",
+        note: "The threshold at which the plugin should change colors. (Default: 30)",
         initialValue: SettingValues.get("colorThreshold", defaultSettings.colorThreshold),
         minValue: 10,
         maxValue: 100,
         renderValue: (value: number) => `${value}%`,
         ...util.useSetting(SettingValues, "colorThreshold", defaultSettings.colorThreshold),
-      }}
-    />
+      }}>
+      Color Threshold
+    </SliderItem>
     <SliderItem
       {...{
-        title: "Change percentage",
         note: "The percentage to lighten/darken the color. (Default: 40)",
         initialValue: SettingValues.get("percentage", defaultSettings.percentage),
         minValue: 10,
         maxValue: 100,
         renderValue: (value: number) => `${value}%`,
         ...util.useSetting(SettingValues, "percentage", defaultSettings.percentage),
-      }}
-    />
+      }}>
+      Change percentage
+    </SliderItem>
     <SwitchItem
       {...{
         note: "Whether to change the role color. Normally the member color gets patched directly. (It is recommended to keep this turned off, as it may cause performance issues.)",

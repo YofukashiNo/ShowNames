@@ -1,6 +1,6 @@
 {
   "name": "show-names",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "description": "Makes names visible if they are (almost) the same color as the background.",
   "engines": {
     "node": ">=14.0.0"
@@ -29,7 +29,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-react": "^7.31.10",
     "prettier": "^2.8.1",
-    "replugged": "4.0.0-beta0.27",
+    "replugged": "4.0.0-beta0.28",
     "typescript": "^4.8.4"
   },
   "dependencies": {
