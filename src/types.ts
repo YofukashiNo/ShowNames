@@ -115,7 +115,6 @@ export interface ChannelMemerListCache {
 export interface ChannelMemberStore {
   getProps: DefaultTypes.AnyFunction;
   initialize: DefaultTypes.AnyFunction;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   __getLocalVars: () => ChannelMemerListCache;
 }
 export interface SliderItemProps {
