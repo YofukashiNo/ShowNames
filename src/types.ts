@@ -54,6 +54,7 @@ export interface GuildMember {
   activities: [];
   applicationStream: null | string;
   avatar: null | string;
+  color: number;
   colorRoleId: null | string;
   colorString: null | string;
   communicationDisabledUntil: null | string;
@@ -117,25 +118,23 @@ export interface ChannelMemberStore {
   initialize: DefaultTypes.AnyFunction;
   __getLocalVars: () => ChannelMemerListCache;
 }
-export interface SliderItemProps {
-  title?: string;
-  note?: string;
-  disabled?: boolean;
-  markers?: number[];
-  stickToMarkers?: boolean;
-  initialValue?: number;
-  defaultValue?: number;
-  minValue?: number;
-  maxValue?: number;
-  mini?: boolean;
-  style?: React.CSSProperties;
-  className?: string;
-  onValueChange?: (e: number) => void;
-  asValueChanges?: (e: number) => void;
-  onValueRender?: (e: number) => string;
-  onMarkerRender?: (e: number) => string;
-  value?: number;
-  onChange?: (e: number) => void;
+export interface Role {
+  color: number;
+  colorString: null | string;
+  flags: number;
+  hoist: boolean;
+  icon: null | string;
+  id: string;
+  managed: boolean;
+  mentionable: boolean;
+  name: string;
+  originalPosition: number;
+  permissions: bigint;
+  position: number;
+  tags: {
+    bot_id?: string;
+  };
+  unicodeEmoji: null | string;
 }
 export interface Settings {
   colorThreshold: number;

@@ -1,6 +1,9 @@
 import * as Types from "../types";
 export const isObject = (testMaterial: unknown): boolean =>
-  typeof testMaterial === "object" && !Array.isArray(testMaterial) && testMaterial != null;
+  typeof testMaterial === "object" &&
+  !Array.isArray(testMaterial) &&
+  testMaterial != null &&
+  testMaterial !== DOMTokenList.prototype;
 
 export const prototypeChecker = (
   ModuleExports: Types.DefaultTypes.ModuleExports,

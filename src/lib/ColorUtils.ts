@@ -1,5 +1,7 @@
+import { PluginLogger, SettingValues } from "../index";
+import { defaultSettings } from "./consts";
 import { ThemeStore } from "./requiredModules";
-import { PluginLogger } from "../index";
+
 export const rgba2hex = (rgba: string): string =>
   `#${rgba
     .match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+\.{0,1}\d*))?\)$/)
@@ -61,4 +63,21 @@ export const getDifference = (color1: string, color2: string): number => {
   const P3 = (B2 / 255) * 100;
   const PREC2 = Math.round((P1 + P2 + P3) / 3);
   return Math.abs(perc1 - PREC2);
+};
+export const changeColor = (item): void => {
+  if (!item?.colorString) {
+    return;
+  }
+  const backgroundColor = getBackgroundColor(),
+    difference = getDifference(backgroundColor, item.colorString);
+
+  if (difference > SettingValues.get("colorThreshold", defaultSettings.colorThreshold)) {
+    return;
+  }
+  const changePercent = Math.floor(
+    ((SettingValues.get("percentage", defaultSettings.percentage) - difference) / 100) * 255,
+  );
+  const visiblifiedColor = makeColorVisible(item.colorString, changePercent);
+  item.colorString = visiblifiedColor;
+  item.color = hexToDecimal(visiblifiedColor);
 };
