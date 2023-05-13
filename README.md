@@ -5,11 +5,16 @@ Improve the readability of names if their color is (almost) the same as the back
 The plugin works by changing the color locally.
 
 Direct Download Link:
-[Tharki.ShowNames.asar](https://github.com/Tharki-God/ShowNames/releases/latest/download/Tharki.ShowNames.asar)
+[dev.tharki.ShowNames.asar](https://github.com/Tharki-God/ShowNames/releases/latest/download/dev.tharki.ShowNames.asar)
 
 Install Link:
 [![Install in Replugged](https://img.shields.io/badge/-Install%20in%20Replugged-blue?style=for-the-badge&logo=none)](https://replugged.dev/install?identifier=Tharki-God/ShowNames&source=github)
 
 ![image](https://raw.githubusercontent.com/Tharki-God/files-random-host/main/bdpluginsassets/shownames.gif)
+
+> For issues related to plugin either DM the dev or ask in support server listed below.
+>If making a post in support channel on replugged server then ping me!
+>
+> [![Support Server](https://discordapp.com/api/guilds/919649417005506600/widget.png?style=banner3)](https://discord.gg/SgKSKyh9gY)
 
 > For Contributing: [Make a pr thats all.]

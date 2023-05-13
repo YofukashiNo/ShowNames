@@ -1,5 +1,5 @@
 {
-  "id": "Tharki.ShowNames",
+  "id": "dev.tharki.ShowNames",
   "name": "ShowNames",
   "description": "Makes names visible if they are (almost) the same color as the background.",
   "author": {
@@ -7,7 +7,7 @@
     "discordID": "1025214794766221384",
     "github": "Tharki-God"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "updater": {
     "type": "github",
     "id": "Tharki-God/ShowNames"
