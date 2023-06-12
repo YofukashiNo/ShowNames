@@ -8,7 +8,7 @@ Direct Download Link: [dev.tharki.ShowNames.asar](https://github.com/Tharki-God/
 
 Install Link:
 
-[![Install in Replugged](https://img.shields.io/badge/-Install%20in%20Replugged-blue?style=for-the-badge&logo=none)](https://replugged.dev/install?identifier=Tharki-God/ShowNames&source=github)
+[![Install in Replugged](https://img.shields.io/badge/-Install%20in%20Replugged-blue?style=for-the-badge&logo=none)](https://replugged.dev/install?identifier=dev.tharki.ShowNames)
 
 ![image](https://raw.githubusercontent.com/Tharki-God/files-random-host/main/bdpluginsassets/shownames.gif)
 

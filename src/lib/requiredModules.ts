@@ -2,20 +2,17 @@ import { webpack } from "replugged";
 import * as Utils from "./utils";
 import * as Types from "../types";
 
-export const ThemeStore = webpack.getByProps("theme");
+export const ThemeStore = webpack.getByProps<{ theme: string }>("theme");
 
-export const GuildMemberStore = webpack.getByProps(
-  "getMember",
-) as unknown as Types.GuildMemberStore;
+export const GuildMemberStore = webpack.getByProps<Types.GuildMemberStore>("getMember");
 
 const ChannelMemberStoreModule = webpack.getBySource("ChannelMemberStore");
 
-export const ChannelMemberStore = webpack.getExportsForProps(ChannelMemberStoreModule, [
-  "getProps",
-  "initialize",
-  "__getLocalVars",
-]) as unknown as Types.ChannelMemberStore;
+export const ChannelMemberStore = webpack.getExportsForProps<Types.ChannelMemberStore>(
+  ChannelMemberStoreModule,
+  ["getProps", "initialize", "__getLocalVars"],
+);
 
-export const GuildPrototype = webpack.getModule((m) =>
+export const GuildPrototype = webpack.getModule<Types.DefaultTypes.AnyFunction>((m) =>
   Utils.prototypeChecker(m?.exports, ["getRole", "getIconURL"]),
-) as unknown as Types.DefaultTypes.AnyFunction;
+);
