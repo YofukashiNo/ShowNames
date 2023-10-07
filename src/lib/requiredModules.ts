@@ -6,7 +6,8 @@ export const ThemeStore = webpack.getByStoreName<{ theme: string } & Types.Store
 
 export const GuildMemberStore = webpack.getByProps<Types.GuildMemberStore>("getMember");
 
-export const ChannelMemberStore = webpack.getByStoreName("ChannelMemberStore");
+export const ChannelMemberStore =
+  webpack.getByStoreName<Types.ChannelMemberStore>("ChannelMemberStore");
 
 export const GuildPrototype = webpack.getModule<Types.DefaultTypes.AnyFunction>((m) =>
   Utils.prototypeChecker(m?.exports, ["getRole", "getIconURL"]),

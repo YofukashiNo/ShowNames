@@ -11,7 +11,7 @@ export const registerSettings = (): void => {
   }
 };
 
-export const Settings = (): Types.ReactElement => (
+export const Settings = (): React.ReactElement => (
   <div>
     <SliderItem
       {...{
