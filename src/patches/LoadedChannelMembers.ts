@@ -1,8 +1,8 @@
 import { ChannelMemberStore } from "../lib/requiredModules";
 import * as ColorUtils from "../lib/ColorUtils";
 export const patchLoadedChannelMembers = (): void => {
-  const ChannelMemerListCache = ChannelMemberStore.__getLocalVars();
-  const channelLists = Object.values(ChannelMemerListCache.memberLists._guildLists);
+  const ChannelMemerListCache = ChannelMemberStore.getState();
+  const channelLists = Object.values(ChannelMemerListCache._guildLists);
   const LoadedMembersCache = channelLists
     .map((m) => Object.values(m))
     .flat(1)
