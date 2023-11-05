@@ -1,11 +1,11 @@
 import { types as DefaultTypes } from "replugged";
+export { types as DefaultTypes } from "replugged";
 import type { Store } from "replugged/dist/renderer/modules/common/flux";
+export type { Store } from "replugged/dist/renderer/modules/common/flux";
 import type { GuildMember } from "discord-types/general";
 export type { Role, User, GuildMember } from "discord-types/general";
-export type { Store } from "replugged/dist/renderer/modules/common/flux";
-export { types as DefaultTypes } from "replugged";
 
-export interface GuildMemberStore {
+export interface GuildMemberStore extends Store {
   getCommunicationDisabledUserMap: DefaultTypes.AnyFunction;
   getCommunicationDisabledVersion: DefaultTypes.AnyFunction;
   getMember: DefaultTypes.AnyFunction;
@@ -63,3 +63,5 @@ export interface Settings {
   percentage: number;
   shouldPatchRole: boolean;
 }
+
+export * as default from "./types";

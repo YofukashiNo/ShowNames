@@ -1,6 +1,6 @@
 import { ChannelMemberStore } from "../lib/requiredModules";
-import * as ColorUtils from "../lib/ColorUtils";
-export const patchLoadedChannelMembers = (): void => {
+import ColorUtils from "../lib/ColorUtils";
+export default (): void => {
   const ChannelMemerListCache = ChannelMemberStore.getState();
   const channelLists = Object.values(ChannelMemerListCache._guildLists);
   const LoadedMembersCache = channelLists

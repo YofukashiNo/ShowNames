@@ -81,3 +81,12 @@ export const changeColor = (item): void => {
   item.colorString = visiblifiedColor;
   item.color = hexToDecimal(visiblifiedColor);
 };
+
+export default {
+  rgba2hex,
+  hexToDecimal,
+  lightenDarkenColor,
+  makeColorVisible,
+  getDifference,
+  changeColor,
+};
