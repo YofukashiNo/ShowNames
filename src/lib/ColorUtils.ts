@@ -1,6 +1,7 @@
 import { PluginLogger, SettingValues } from "../index";
 import { defaultSettings } from "./consts";
 import { ThemeStore } from "./requiredModules";
+import Types from "../types";
 
 export const rgba2hex = (rgba: string): string =>
   `#${rgba
@@ -64,7 +65,7 @@ export const getDifference = (color1: string, color2: string): number => {
   const PREC2 = Math.round((P1 + P2 + P3) / 3);
   return Math.abs(perc1 - PREC2);
 };
-export const changeColor = (item): void => {
+export const changeColor = (item: Types.GuildMember | Types.Role): void => {
   if (!item?.colorString) {
     return;
   }

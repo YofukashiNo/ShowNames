@@ -14,32 +14,26 @@ export const registerSettings = (): void => {
 export const Settings = (): React.ReactElement => (
   <div>
     <SliderItem
-      {...{
-        note: "The threshold at which the plugin should change colors. (Default: 30)",
-        initialValue: SettingValues.get("colorThreshold", defaultSettings.colorThreshold),
-        minValue: 10,
-        maxValue: 100,
-        renderValue: (value: number) => `${value}%`,
-        ...util.useSetting(SettingValues, "colorThreshold", defaultSettings.colorThreshold),
-      }}>
+      note="The threshold at which the plugin should change colors. (Default: 30)"
+      initialValue={SettingValues.get("colorThreshold", defaultSettings.colorThreshold)}
+      minValue={10}
+      maxValue={100}
+      onValueRender={(value) => `${value}%`}
+      {...util.useSetting(SettingValues, "colorThreshold", defaultSettings.colorThreshold)}>
       Color Threshold
     </SliderItem>
     <SliderItem
-      {...{
-        note: "The percentage to lighten/darken the color. (Default: 40)",
-        initialValue: SettingValues.get("percentage", defaultSettings.percentage),
-        minValue: 10,
-        maxValue: 100,
-        renderValue: (value: number) => `${value}%`,
-        ...util.useSetting(SettingValues, "percentage", defaultSettings.percentage),
-      }}>
+      note="The percentage to lighten/darken the color. (Default: 40)"
+      initialValue={SettingValues.get("percentage", defaultSettings.percentage)}
+      minValue={10}
+      maxValue={100}
+      onValueRender={(value) => `${value}%`}
+      {...util.useSetting(SettingValues, "percentage", defaultSettings.percentage)}>
       Change percentage
     </SliderItem>
     <SwitchItem
-      {...{
-        note: "Whether to change the role color. Normally the member color gets patched directly. (It is recommended to keep this turned off, as it may cause performance issues.)",
-        ...util.useSetting(SettingValues, "shouldPatchRole", defaultSettings.shouldPatchRole),
-      }}>
+      note="Whether to change the role color. Normally the member color gets patched directly. (It is recommended to keep this turned off, as it may cause performance issues.)"
+      {...util.useSetting(SettingValues, "shouldPatchRole", defaultSettings.shouldPatchRole)}>
       Role color
     </SwitchItem>
   </div>

@@ -1,7 +1,7 @@
-import * as Types from "./types";
+import Types from "./types";
 export default [
   {
-    find: '.displayName="ChannelMemberStore"',
+    find: '="ChannelMemberStore"',
     replacements: [
       {
         match: /getProps\(\w+,\w+\){let \w+=(\w+).get/,

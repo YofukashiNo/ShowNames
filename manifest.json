@@ -3,11 +3,11 @@
   "name": "ShowNames",
   "description": "Makes names visible if they are (almost) the same color as the background.",
   "image": "https://i.imgur.com/GuNfPVX.png",
-  "source": "https://github.com/Tharki-God/ShowNames",
+  "source": "https://github.com/YofukashiNo/ShowNames",
   "author": {
-    "name": "Ahlawat",
-    "discordID": "1025214794766221384",
-    "github": "Tharki-God"
+    "name": "Nanakusa",
+    "discordID": "1121961711080050780",
+    "github": "YofukashiNo"
   },
   "version": "1.0.5",
   "updater": {

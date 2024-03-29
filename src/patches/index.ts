@@ -1,8 +1,10 @@
 import patchGuildMemberStore from "./GuildMemberStore";
-import patchGuildPrototype from "./GuildPrototype";
+import patchGuildStore from "./GuildStore";
 import patchLoadedChannelMembers from "./LoadedChannelMembers";
-export default (): void => {
+export const applyInjections =  (): void => {
   patchGuildMemberStore();
-  patchGuildPrototype();
+  patchGuildStore();
   patchLoadedChannelMembers();
 };
+
+export default {applyInjections}
