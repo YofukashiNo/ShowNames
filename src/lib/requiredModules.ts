@@ -8,5 +8,4 @@ export const GuildMemberStore = webpack.getByStoreName<Types.GuildMemberStore>("
 export const ChannelMemberStore =
   webpack.getByStoreName<Types.ChannelMemberStore>("ChannelMemberStore");
 
-export const GuildStore = 
-webpack.getByStoreName<Types.GuildStore>("GuildStore");
+export const GuildStore = webpack.getByStoreName<Types.GuildStore>("GuildStore");
