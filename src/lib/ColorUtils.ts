@@ -1,6 +1,6 @@
 import { PluginLogger, SettingValues } from "../index";
 import { defaultSettings } from "./consts";
-import { ThemeStore } from "./requiredModules";
+import Modules from "./requiredModules";
 import Types from "../types";
 
 export const rgba2hex = (rgba: string): string =>
@@ -32,7 +32,7 @@ export const lightenDarkenColor = (color: string, amount: number): string =>
       `0${Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)}`.substr(-2),
     )}`;
 export const makeColorVisible = (color: string, precent: number): string => {
-  const { theme } = ThemeStore;
+  const { theme } = Modules.ThemeStore;
   switch (theme) {
     case "light":
       return lightenDarkenColor(color, -precent);

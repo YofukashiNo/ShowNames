@@ -79,6 +79,13 @@ export namespace Types {
     initialize: DefaultTypes.AnyFunction;
     getState: () => ChannelMemerListCache;
   }
+  export interface Modules {
+    loadModules?: () => Promise<void> | void;
+    ThemeStore?: ThemeStore;
+    GuildMemberStore?: GuildMemberStore;
+    ChannelMemberStore?: ChannelMemberStore;
+    GuildStore?: GuildStore;
+  }
   export interface Settings {
     colorThreshold: number;
     percentage: number;

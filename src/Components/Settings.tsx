@@ -38,3 +38,5 @@ export const Settings = (): React.ReactElement => (
     </SwitchItem>
   </div>
 );
+
+export default { registerSettings, Settings };
