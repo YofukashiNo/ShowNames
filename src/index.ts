@@ -4,7 +4,7 @@ import Settings from "./Components/Settings";
 export const PluginInjector = new Injector();
 export const PluginLogger = Logger.plugin("ShowNames");
 export const SettingValues = await settings.init("dev.tharki.ShowNames", defaultSettings);
-import Injections from "./patches/index";
+import Injections from "./injections/index";
 
 export const start = (): void => {
   Settings.registerSettings();
