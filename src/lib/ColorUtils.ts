@@ -66,6 +66,7 @@ export const getBackgroundColor = (): string => {
   const color = window.getComputedStyle(document.body).getPropertyValue("background-color");
   if (color === "transparent") {
     PluginLogger.error("Transparent background detected. Contact the developer for help!");
+    return "#000000000";
   }
   if (
     Date.now() - _backgroundColorCache.timeFetched > 1000 * 60 * 1.5 ||
