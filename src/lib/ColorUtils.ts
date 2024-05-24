@@ -5,7 +5,7 @@ import Types from "../types";
 
 const backgroundColorCache = {
   timeFetched: Date.now(),
-  color: "",
+  color: null,
 };
 
 export const oklabToLinearRGB = (L: number, a: number, b: number): [number, number, number] => {
@@ -69,7 +69,7 @@ export const getBackgroundColor = (): string => {
   }
   return Date.now() - backgroundColorCache.timeFetched > 1000 * 60 * 1.5
     ? (backgroundColorCache.color = colorToHex(prop))
-    : backgroundColorCache.color;
+    : (backgroundColorCache.color ??= colorToHex(prop));
 };
 export const lightenDarkenColor = (color: string, amount: number): string =>
   `#${color
