@@ -3,7 +3,7 @@ import { defaultSettings } from "./consts";
 import Modules from "./requiredModules";
 import Types from "../types";
 
-const backgroundColorCache = {
+const _backgroundColorCache = {
   timeFetched: Date.now(),
   color: null,
 };
@@ -63,14 +63,20 @@ export const hexToDecimal = (hex: string): number => {
 };
 
 export const getBackgroundColor = (): string => {
-  const prop = window.getComputedStyle(document.body).getPropertyValue("background-color");
-  if (prop === "transparent") {
+  const color = window.getComputedStyle(document.body).getPropertyValue("background-color");
+  if (color === "transparent") {
     PluginLogger.error("Transparent background detected. Contact the developer for help!");
   }
-  return Date.now() - backgroundColorCache.timeFetched > 1000 * 60 * 1.5
-    ? (backgroundColorCache.color = colorToHex(prop))
-    : (backgroundColorCache.color ??= colorToHex(prop));
+  if (
+    Date.now() - _backgroundColorCache.timeFetched > 1000 * 60 * 1.5 ||
+    !_backgroundColorCache.color
+  ) {
+    _backgroundColorCache.color = colorToHex(color);
+    _backgroundColorCache.timeFetched = Date.now();
+  }
+  return _backgroundColorCache.color;
 };
+
 export const lightenDarkenColor = (color: string, amount: number): string =>
   `#${color
     .replace(/^#/, "")
