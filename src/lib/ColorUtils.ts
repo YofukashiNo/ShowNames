@@ -3,27 +3,73 @@ import { defaultSettings } from "./consts";
 import Modules from "./requiredModules";
 import Types from "../types";
 
-export const rgba2hex = (rgba: string): string =>
-  `#${rgba
-    .match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+\.{0,1}\d*))?\)$/)
-    .slice(1)
-    .map((n, i) =>
-      (i === 3 ? Math.round(parseFloat(n) * 255) : parseFloat(n))
-        .toString(16)
-        .padStart(2, "0")
-        .replace("NaN", ""),
-    )
-    .join("")}`;
+const backgroundColorCache = {
+  timeFetched: Date.now(),
+  color: "",
+};
+
+export const oklabToLinearRGB = (L: number, a: number, b: number): [number, number, number] => {
+  const M = L - a * 0.3963377774 - b * 0.2158037573;
+  const S = L - a * 0.1055613458 - b * 0.0638541728;
+  return [
+    4.0767416621 * L - 3.3077115913 * M + 0.2309699292 * S,
+    -1.2684380046 * L + 2.6097574011 * M - 0.3413193965 * S,
+    -0.0041960863 * L - 0.7034186147 * M + 1.707614701 * S,
+  ];
+};
+
+export const colorToHex = (color: string): string => {
+  const tempDiv = document.createElement("div");
+  tempDiv.style.color = color;
+  document.body.appendChild(tempDiv);
+  const computedColor = window.getComputedStyle(tempDiv).color;
+  document.body.removeChild(tempDiv);
+
+  const rgbaMatch = computedColor.match(
+    /^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d*(?:\.\d+)?))?\)$/,
+  );
+  if (rgbaMatch)
+    return `#${rgbaMatch
+      .slice(1)
+      .map((n, i) =>
+        (i === 3 ? Math.round(parseFloat(n) * 255) : parseFloat(n))
+          .toString(16)
+          .padStart(2, "0")
+          .replace("NaN", ""),
+      )
+      .join("")}`;
+
+  const oklabMatch = computedColor.match(
+    /^oklab\((-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?)\)$/,
+  );
+  if (oklabMatch) {
+    const [L, a, b] = [
+      parseFloat(oklabMatch[1]),
+      parseFloat(oklabMatch[3]),
+      parseFloat(oklabMatch[5]),
+    ];
+    const [R, G, B] = oklabToLinearRGB(L, a, b);
+    return `#${[R, G, B]
+      .map((c) => Math.round(c * 255))
+      .map((c) => c.toString(16).padStart(2, "0"))
+      .join("")}`;
+  }
+
+  return "#000000";
+};
+
 export const hexToDecimal = (hex: string): number => {
   return parseInt(hex.replace(/^#/, ""), 16);
 };
+
 export const getBackgroundColor = (): string => {
-  const getBody = document.getElementsByTagName("body")[0];
-  const prop = window.getComputedStyle(getBody).getPropertyValue("background-color");
+  const prop = window.getComputedStyle(document.body).getPropertyValue("background-color");
   if (prop === "transparent") {
     PluginLogger.error("Transparent background detected. Contact the developer for help!");
   }
-  return rgba2hex(prop);
+  return Date.now() - backgroundColorCache.timeFetched > 1000 * 60 * 1.5
+    ? (backgroundColorCache.color = colorToHex(prop))
+    : backgroundColorCache.color;
 };
 export const lightenDarkenColor = (color: string, amount: number): string =>
   `#${color
@@ -84,7 +130,8 @@ export const changeColor = (item: Types.GuildMember | Types.Role): void => {
 };
 
 export default {
-  rgba2hex,
+  oklabToLinearRGB,
+  colorToHex,
   hexToDecimal,
   lightenDarkenColor,
   makeColorVisible,
