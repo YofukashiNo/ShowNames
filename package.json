@@ -1,6 +1,6 @@
 {
   "name": "show-names",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Makes names visible if they are (almost) the same color as the background.",
   "engines": {
     "node": ">=14.0.0"
