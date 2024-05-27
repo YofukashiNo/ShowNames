@@ -90,9 +90,12 @@ export const makeColorVisible = (color: string, precent: number): string => {
     case "light":
       return lightenDarkenColor(color, -precent);
     case "dark":
+    case "darker":
+    case "midnight":
       return lightenDarkenColor(color, precent);
     default:
       PluginLogger.error("Unknown theme detected. Contact the developer for help!");
+      return lightenDarkenColor(color, 0);
   }
 };
 export const getDifference = (color1: string, color2: string): number => {
@@ -119,21 +122,25 @@ export const getDifference = (color1: string, color2: string): number => {
   return Math.abs(perc1 - PREC2);
 };
 export const changeColor = (item: Types.GuildMember | Types.Role): void => {
-  if (!item?.colorString) {
-    return;
-  }
-  const backgroundColor = getBackgroundColor(),
-    difference = getDifference(backgroundColor, item.colorString);
+  try {
+    if (!item?.colorString) {
+      return;
+    }
+    const backgroundColor = getBackgroundColor();
+    const difference = getDifference(backgroundColor, item.colorString);
 
-  if (difference > SettingValues.get("colorThreshold", defaultSettings.colorThreshold)) {
-    return;
+    if (difference > SettingValues.get("colorThreshold", defaultSettings.colorThreshold)) {
+      return;
+    }
+    const changePercent = Math.floor(
+      ((SettingValues.get("percentage", defaultSettings.percentage) - difference) / 100) * 255,
+    );
+    const visiblifiedColor = makeColorVisible(item.colorString, changePercent);
+    item.colorString = visiblifiedColor;
+    item.color = hexToDecimal(visiblifiedColor);
+  } catch (err) {
+    PluginLogger.error(`Error While Mutating Member: ${err}`);
   }
-  const changePercent = Math.floor(
-    ((SettingValues.get("percentage", defaultSettings.percentage) - difference) / 100) * 255,
-  );
-  const visiblifiedColor = makeColorVisible(item.colorString, changePercent);
-  item.colorString = visiblifiedColor;
-  item.color = hexToDecimal(visiblifiedColor);
 };
 
 export default {
